@@ -10,12 +10,24 @@
 #include <stdlib.h>
 #include <math.h>
 
-double **mult(double **matrice, int nb, int ac)
+int factoriel(int nb)
 {
-    double **A = matrice;
-    for (int i = 0; i != sqrt(ac - 2); ++i)
-            for (int j = 0; j != sqrt(ac - 2); ++j)
-                A[i][j] = 0;
+    int res = 1;
+    for (; nb != 0; nb--)res *= nb;
+    return res;
+}
+
+double **add(double **matrice, double **matrice2, int ac)
+{
+    for (int i = 0; i != sqrt(ac - 2); ++i)for (int j = 0; j != sqrt(ac - 2); ++j)matrice[i][j] += matrice2[i][j];
+    return matrice;
+}
+
+double **pow_(double **matrice, int nb, int ac)
+{
+    double **A = malloc(sizeof(char *) * (sqrt(ac - 1)));
+    for (int i = 0; i != sqrt(ac - 2); ++i)A[i] = malloc(sizeof(char) * (sqrt(ac - 1)));
+    for (int i = 0; i != sqrt(ac - 2); ++i)for (int j = 0; j != sqrt(ac - 2); ++j)A[i][j] = 0;
     double resu = 1;
     int save, save2 = 0;
     for (int k = 0; k != nb; ++k)
@@ -23,7 +35,7 @@ double **mult(double **matrice, int nb, int ac)
             for (int j = 0; j != sqrt(ac - 2); ++j) {
                 for (int lol = 0, salut = j; lol != sqrt(ac - 2); lol++, salut++) {
                     resu *= matrice[i][lol];
-                    resu *= matrice[j][salut];
+                    resu *= matrice[salut][lol];
                     A[i][j] += resu;
                     resu = 1;
                 }
@@ -40,41 +52,46 @@ int comp(char *str, char *str2)
 
 void cos_(int ac, char **av)
 {
-    int i = 0, j = 0;
+    int i, j, size = 0;
     int k = 2;
-    double tab[sqrt(ac - 2)][ac - 1];
+    size = sqrt(ac - 2);
+    double tab[size][ac - 1];
     for (; i != sqrt(ac - 2); i++)for (j = 0; j != sqrt(ac - 2); ++j, k++)tab[i][j] = atof(av[k]);
 }
 
 void exp_(int ac, char **av)
 {
-    int i = 0, j = 0;
+    int i, j, size = 0;
     int k = 2;
-    double tab[sqrt(ac - 2)][ac - 1];
+    size = sqrt(ac - 2);
+    double tab[size][ac - 1];
     for (; i != sqrt(ac - 2); i++)for (j = 0; j != sqrt(ac - 2); ++j, k++)tab[i][j] = atof(av[k]);
 }
 
 void sin_(int ac, char **av)
 {
-    int i = 0, j = 0;
+    int i, j, size = 0;
     int k = 2;
-    double tab[sqrt(ac - 2)][ac - 1];
+    size = sqrt(ac - 2);
+    double tab[size][ac - 1];
     for (; i != sqrt(ac - 2); i++)for (j = 0; j != sqrt(ac - 2); ++j, k++)tab[i][j] = atof(av[k]);
 }
 
 void cosh_(int ac, char **av)
 {
-    int i = 0, j = 0;
+    int i, j, size = 0;
     int k = 2;
-    double tab[sqrt(ac - 2)][ac - 1];
+    size = sqrt(ac - 2);
+    double tab[size][ac - 1];
     for (; i != sqrt(ac - 2); i++)for (j = 0; j != sqrt(ac - 2); ++j, k++)tab[i][j] = atof(av[k]);
 }
 
 void sinh_(int ac, char **av)
 {
-    int i = 0, j = 0;
+    int i, j, size = 0;
     int k = 2;
-    double tab[sqrt(ac - 2)][ac - 1];
+    size = sqrt(ac - 2);
+    double tab[size][ac - 1];
     for (; i != sqrt(ac - 2); i++)for (j = 0; j != sqrt(ac - 2); ++j, k++)tab[i][j] = atof(av[k]);
 }
 
