@@ -1,6 +1,6 @@
 NAME	= 108trigo
 
-CC	= gcc
+CC	= gcc -lm
 
 RM	= rm -f
 

@@ -10,11 +10,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-double **create_idt(double **idt, int ac)
+double **create_idt(int ac)
 {
     int space[2] = {0, 0};
     int fin = (int)sqrt(ac);
-    idt = malloc(sizeof(double * ) * (fin + 1));
+    double **idt = malloc(sizeof(double * ) * (fin + 1));
     for (int i = 0; i != fin; ++i)idt[i] = malloc(sizeof(double) * (fin + 1));
     for (int i = 0; i != fin; ++i) {
         for (int j = 0; j != fin; ++j) {
@@ -106,7 +106,7 @@ int comp(char *str, char *str2)
 
 double **cos_(int ac, char **av)
 {
-    double **identite = create_idt(identite, ac - 2);
+    double **identite = create_idt(ac - 2);
     int i, j, size, aled = 0;
     int k = 2;
     double save_ = 1000, save_1 = 0;
@@ -123,9 +123,9 @@ double **cos_(int ac, char **av)
         }
     }
     for (int i = 0; i != sqrt(ac - 2); ++i)for (int j = 0; j != sqrt(ac - 2); ++j)res[i][j] = 0;
-    res = add(identite, tab, ac);
+    res = add(identite, res, ac);
     aled = 1;
-    for (i = 2; fabs(save_ - save_1) > 0.001; i += 2) {
+    for (i = 2; fabs(save_ - save_1) > 0.0001; i += 2) {
         save_1 = save_;
         save = pow_(tab, i, ac);
         save = div_(save, i, ac);
@@ -144,7 +144,8 @@ double **cos_(int ac, char **av)
 
 double **exp_(int ac, char **av)
 {
-    double **identite = create_idt(identite, ac - 2);
+    double **identite;
+    identite = create_idt(ac - 2);
     int i, j, size = 0;
     int k = 2;
     double save_ = 1000, save_1 = 0;
@@ -162,7 +163,7 @@ double **exp_(int ac, char **av)
     }
     for (int i = 0; i != sqrt(ac - 2); ++i)for (int j = 0; j != sqrt(ac - 2); ++j)res[i][j] = 0;
     res = add(identite, tab, ac);
-    for (i = 2; fabs(save_ - save_1) > 0.001; i++) {
+    for (i = 2; fabs(save_ - save_1) > 0.0001; i++) {
         save_1 = save_;
         save = pow_(tab, i, ac);
         save = div_(save, i, ac);
@@ -174,7 +175,8 @@ double **exp_(int ac, char **av)
 
 double **sin_(int ac, char **av)
 {
-    double **identite = create_idt(identite, ac - 2);
+    double **identite;
+    identite = create_idt(ac - 2);
     int i, j, size = 0;
     int k = 2;
     double save_ = 1000, save_1 = 0, aled = 0;
@@ -192,7 +194,7 @@ double **sin_(int ac, char **av)
     }
     for (int i = 0; i != sqrt(ac - 2); ++i)for (int j = 0; j != sqrt(ac - 2); ++j)res[i][j] = 0;
     res = add(res, tab, ac);
-    for (i = 3; fabs(save_ - save_1) > 0.001; i += 2) {
+    for (i = 3; fabs(save_ - save_1) > 0.0001; i += 2) {
         save_1 = save_;
         save = pow_(tab, i, ac);
         save = div_(save, i, ac);
@@ -211,7 +213,8 @@ double **sin_(int ac, char **av)
 
 double **cosh_(int ac, char **av)
 {
-    double **identite = create_idt(identite, ac - 2);
+    double **identite;
+    identite = create_idt(ac - 2);
     int i, j, size = 0;
     int k = 2;
     double save_ = 1000, save_1 = 0;
@@ -228,8 +231,8 @@ double **cosh_(int ac, char **av)
         }
     }
     for (int i = 0; i != sqrt(ac - 2); ++i)for (int j = 0; j != sqrt(ac - 2); ++j)res[i][j] = 0;
-    res = add(identite, tab, ac);
-    for (i = 2; fabs(save_ - save_1) > 0.001; i += 2) {
+    res = add(identite, res, ac);
+    for (i = 2; fabs(save_ - save_1) > 0.0001; i += 2) {
         save_1 = save_;
         save = pow_(tab, i, ac);
         save = div_(save, i, ac);
@@ -241,7 +244,8 @@ double **cosh_(int ac, char **av)
 
 double **sinh_(int ac, char **av)
 {
-    double **identite = create_idt(identite, ac - 2);
+    double **identite;
+    identite = create_idt(ac - 2);
     int i, j, size = 0;
     int k = 2;
     double save_ = 1000, save_1 = 0;
@@ -259,7 +263,7 @@ double **sinh_(int ac, char **av)
     }
     for (int i = 0; i != sqrt(ac - 2); ++i)for (int j = 0; j != sqrt(ac - 2); ++j)res[i][j] = 0;
     res = add(res, tab, ac);
-    for (i = 3; fabs(save_ - save_1) > 0.001; i += 2) {
+    for (i = 3; fabs(save_ - save_1) > 0.0001; i += 2) {
         save_1 = save_;
         save = pow_(tab, i, ac);
         save = div_(save, i, ac);
@@ -272,13 +276,15 @@ double **sinh_(int ac, char **av)
 void determine(int ac, char **av)
 {
     double **res;
+    int i = 0, j = 0;
     double** (*launch[5])(int, char **) = {cos_, exp_, sin_, cosh_, sinh_};
     char tab[5][5] = {"COS", "EXP", "SIN", "COSH", "SINH"};
     for (int i = 0; i != 5; ++i)if (comp(tab[i], av[1]) == 0)res = launch[i](ac, av);
-    for (int i = 0; i != sqrt(ac - 2); ++i) {
-        for (int j = 0; j != sqrt(ac - 2); ++j) {
-            printf("%0.2lf\n", res[i][j]);
+    for (i = 0; i != sqrt(ac - 2); ++i) {
+        for (j = 0; j != sqrt(ac - 2) - 1; ++j) {
+            printf("%0.2lf\t", res[i][j]);
         }
+        printf("%0.2lf\n", res[i][j]);
     }
 }
 
@@ -293,6 +299,7 @@ int verify_h(char *str)
 
 int main(int ac, char **av)
 {
+    /*double **res = menos((double *[2]){(double[2]){1, 2}, (double[2]){3, 4}}, (double *[2]){(double[2]){1, 2}, (double[2]){3, 4}}, ac);*/
     char tab[5][5] = {"COS", "EXP", "SIN", "COSH", "SINH"};
     int res = 0;
     if (ac == 2 && verify_h(av[1]) == 0)return 0;
@@ -303,4 +310,5 @@ int main(int ac, char **av)
     else return 84;
     for (int i = 2; i != ac; ++i)for (int j = 0; av[i][j] != '\0'; ++j)if (av[i][j] > 57 || av[i][j] < 45)return 84;
     determine(ac, av);
+    return 0;
 }
