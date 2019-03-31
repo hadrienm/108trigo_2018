@@ -25,7 +25,4 @@ fclean: clean
 
 re: fclean all
 
-tests_run:
-				cd tests/ && $(MAKE)
-
 .PHONY: all clean fclean re tests_run
