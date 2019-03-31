@@ -1,10 +1,10 @@
-#ifndef MY_H
-#define MY_H
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+#ifndef MY_H
+#define MY_H
 
 double **create_idt(int ac);
 double factoriel(int nb);

@@ -87,7 +87,6 @@ double **pow_(double **matrice, int nb, int ac)
                     resu = 1;
                 }
             }
-    cr_assert_eq(comp("coucou", "coucou"), 0);
         }
         for (int i = 0; i != number; ++i)for (int j = 0; j != number; ++j)A[i][j] = B[i][j];
         for (int i = 0; i != number; ++i)for (int j = 0; j != number; ++j)B[i][j] = 0;
