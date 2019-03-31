@@ -15,7 +15,7 @@ int main(int ac, char **av)
     char tab[5][5] = {"COS", "EXP", "SIN", "COSH", "SINH"};
     int res = 0;
     if (ac == 2 && verify_h(av[1]) == 0)return 0;
-    if (ac < 3)return 84;
+    if (ac <= 3)return 84;
     if (pass != (float)pass2)return 84;
     for (int i = 0; i != 5; ++i)if (comp(tab[i], av[1]) == 0)res++;
     if (res == 1);
