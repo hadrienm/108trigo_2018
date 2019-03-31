@@ -1,20 +1,21 @@
 NAME	= 108trigo
 
-CC	= gcc -lm
+CC	= gcc
 
 RM	= rm -f
 
-SRCS	= ./108trigo.c 
+SRCS	= 	main.c	\
+			108trigo.c
 
 OBJS	= $(SRCS:.c=.o)
 
-CFLAGS = -I 
+CFLAGS = -I ./include
 CFLAGS += -Wall -Wextra
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(CFLAGS)
+	 $(CC) -lm $(OBJS) -o $(NAME) $(CFLAGS)
 
 clean:
 	$(RM) $(OBJS)
@@ -24,4 +25,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+tests_run:
+				cd tests/ && $(MAKE)
+
+.PHONY: all clean fclean re tests_run
