@@ -304,7 +304,7 @@ int main(int ac, char **av)
     int res = 0;
     if (ac == 2 && verify_h(av[1]) == 0)return 0;
     if (ac < 3)return 84;
-    if (sqrt(ac - 2) * sqrt(ac - 2) != (double)(ac - 2))return 84;
+    if (sqrt(ac - 2) % 2 != 0)return 84;
     for (int i = 0; i != 5; ++i)if (comp(tab[i], av[1]) == 0)res++;
     if (res == 1);
     else return 84;
