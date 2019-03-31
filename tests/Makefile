@@ -17,7 +17,7 @@ SRC_UT=         $(SRC_UT_DIR)/unit_test_function_basic.c	\
 OBJ=            $(SRC:.c=.o) $(SRC_UT:.c=.o)
 
 ## Flags de compilation
-CFLAGS=         -Wall -Wextra --coverage -I.
+CFLAGS=         -Wall -Wextra --coverage -lm -I.
 LDFLAGS=        -lcriterion -lgcov
 
 NAME=           unit_tests
